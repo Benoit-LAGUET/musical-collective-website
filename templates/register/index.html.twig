@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegisterController!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Inscription</h1>
+		{{ form(registerForm) }}
+			<br>
+			Vous avez déjà un compte?
+			<a href="{{ path('app_login') }}">Connectez-vous</a>
+		</div>
+	{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+    <a href="{{ path('app_logout') }}">Déconnexion</a>
+    <a href="{{ path('app_forgot_password_request') }}">Modifier son mot de passe</a>
+</div>
+{% endblock %}
