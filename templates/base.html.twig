@@ -14,9 +14,10 @@
 		<!-- Custom styles for this template -->
 		<link href="{{ asset('/assets/css/carousel.css') }}" rel="stylesheet"/>
 		<link href="{{ asset('/assets/css/custom.css') }}" rel="stylesheet"/>
+		<link href="{{ asset('/assets/css/theme.css') }}" rel="stylesheet"/>
 		<script src="https://unpkg.com/feather-icons"></script>
 	</head>
-	<body>
+	<body class="content-offset">
 		<header data-bs-theme="dark">
 			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 				<div class="container-fluid">
@@ -24,56 +25,52 @@
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse" id="navbarCollapse">
-						<ul class="navbar-nav me-auto mb-2 mb-md-0">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
-							</li>
-						</ul>
-						<div class="speed-menu">
-							{% if app.user %}
-								<a href="{{ path('app_account') }}">
-									<i data-feather="user"></i>
-									{{ app.user.firstname }}</a>
-								<a href="{{ path('account_change_password') }}">
-									Mot de passe
-								</a>
-								<a href="{{ path('app_logout') }}">
-									<i data-feather="log-out"></i>
-								</a>
-							{% else %}
-								<a href="{{ path('app_login') }}">
-									<i data-feather="log-in"></i>
-								</a>
-							{% endif %}
-						</div>
+					<div class="collapse navbar-collapse" id="navbarCollapse">{% set currentRoute = app.request.attributes.get('_route') %}
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<a class="nav-link {{ currentRoute == 'app_home' ? 'active' : '' }}" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+						</li>
+					</ul><div class="speed-menu">
+						{% if app.user %}
+							<a href="{{ path('app_account') }}" class="me-2">
+								<i data-feather="user"></i>
+								{{ app.user.firstname }}
+							</a>
+							<a href="{{ path('account_change_password') }}" class="me-2">Mot de passe</a>
+							<a href="{{ path('app_logout') }}" title="Se déconnecter">
+								<i data-feather="log-out"></i>
+							</a>
+						{% else %}
+							<a href="{{ path('app_login') }}" class="me-2">
+								<i data-feather="log-in"></i>
+								Connexion
+							</a>
+							<a href="{{ path('app_register') }}" class="btn btn-warning btn-sm">Inscription</a>
+						{% endif %}
+					</div>
 					</div>
 				</div>
 			</nav>
 		</header>
 
-		{# Affiche toutes les notifications flash #}
-		{% for label, messages in app.flashes(['success', 'info', 'warning', 'error', 'danger']) %}
-			{% set alert = label == 'error' ? 'danger' : label %}
-			{% for message in messages %}
-				<div class="alert alert-{{ alert }}">{{ message }}</div>
+		<div class="container mt-3">
+			{# Affiche toutes les notifications flash, jolies et fermables #}
+			{% for label, messages in app.flashes(['success', 'info', 'warning', 'error', 'danger']) %}
+				{% set alert = label == 'error' ? 'danger' : label %}
+				{% for message in messages %}
+					<div class="alert alert-{{ alert }} alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+					</div>
+				{% endfor %}
 			{% endfor %}
-		{% endfor %}
+		</div>
 
 		<main>
 			{% block body %}{% endblock %}
 
 			<!-- FOOTER -->
-			<footer class="container">
+			<footer class="container text-center text-muted small">
 				<p>
 					&copy; 2017–2024 La Boutique Française
 					<a href="#">CGV</a>
