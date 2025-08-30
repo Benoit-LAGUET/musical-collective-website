@@ -33,7 +33,7 @@ security:
     access_control:
         - { path: ^/account/password, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/account, roles: ROLE_USER }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
