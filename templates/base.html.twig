@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>La Boutique Française - 100% Made in France</title>
+		<title>Collectif Sans Nom</title>
 		<meta name="description" content="La boutique spécialisée dans la fabrication Made In France"/>
 
 		<link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}"/>
@@ -21,39 +21,41 @@
 		<header data-bs-theme="dark">
 			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="{{ path('app_home') }}">La Boutique Française</a>
+					<a class="navbar-brand" href="{{ path('app_login') }}">Collectif Sans Nom</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarCollapse">{% set currentRoute = app.request.attributes.get('_route') %}
-					<ul class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<a class="nav-link {{ currentRoute == 'app_home' ? 'active' : '' }}" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
-						</li>
-					</ul><div class="speed-menu">
-						{% if app.user %}
-							<a href="{{ path('app_account') }}" class="me-2">
-								<i data-feather="user"></i>
-								{{ app.user.firstname }}
-							</a>
-							<a href="{{ path('account_change_password') }}" class="me-2">Mot de passe</a>
-							<a href="{{ path('app_logout') }}" title="Se déconnecter">
-								<i data-feather="log-out"></i>
-							</a>
-						{% else %}
-							<a href="{{ path('app_login') }}" class="me-2">
-								<i data-feather="log-in"></i>
-								Connexion
-							</a>
-							<a href="{{ path('app_register') }}" class="btn btn-warning btn-sm">Inscription</a>
-						{% endif %}
-					</div>
+						<ul class="navbar-nav me-auto mb-2 mb-md-0">
+							<li class="nav-item">
+								<a class="nav-link {{ currentRoute == 'app_login' ? 'active' : '' }}" aria-current="page" href="{{ path('app_login') }}">Accueil</a>
+							</li>
+						</ul>
+						<div class="speed-menu">
+							{% if app.user %}
+								<a href="{{ path('app_account') }}" class="me-2">
+									<i data-feather="user"></i>
+									{{ app.user.firstname }}
+								</a>
+								<a href="{{ path('account_change_password') }}" class="me-2">Mot de passe</a>
+								<a href="{{ path('app_logout') }}" title="Se déconnecter">
+									<i data-feather="log-out"></i>
+								</a>
+							{% else %}
+								<a href="{{ path('app_login') }}" class="me-2">
+									<i data-feather="log-in"></i>
+									Connexion
+								</a>
+								<a href="{{ path('app_register') }}" class="btn btn-warning btn-sm">Inscription</a>
+							{% endif %}
+						</div>
 					</div>
 				</div>
 			</nav>
 		</header>
 
-		<div class="container mt-3">
+		<div
+			class="container mt-3">
 			{# Affiche toutes les notifications flash, jolies et fermables #}
 			{% for label, messages in app.flashes(['success', 'info', 'warning', 'error', 'danger']) %}
 				{% set alert = label == 'error' ? 'danger' : label %}
@@ -72,10 +74,7 @@
 			<!-- FOOTER -->
 			<footer class="container text-center text-muted small">
 				<p>
-					&copy; 2017–2024 La Boutique Française
-					<a href="#">CGV</a>
-					&middot;
-					<a href="#">CGU</a>
+					Collectif Sans Nom
 				</p>
 			</footer>
 		</main>
@@ -84,4 +83,3 @@
 		<script src="{{ asset('/assets/js/global.js') }}"></script>
 	</body>
 </html>
-
