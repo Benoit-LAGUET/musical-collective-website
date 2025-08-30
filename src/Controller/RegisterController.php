@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterUserType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +24,8 @@ final class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre compte a été créé. Vous pouvez maintenant vous connecter.');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('register/index.html.twig', [
@@ -32,3 +33,4 @@ final class RegisterController extends AbstractController
         ]);
     }
 }
+
