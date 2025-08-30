@@ -61,6 +61,14 @@
 			</nav>
 		</header>
 
+		{# Affiche toutes les notifications flash #}
+		{% for label, messages in app.flashes(['success', 'info', 'warning', 'error', 'danger']) %}
+			{% set alert = label == 'error' ? 'danger' : label %}
+			{% for message in messages %}
+				<div class="alert alert-{{ alert }}">{{ message }}</div>
+			{% endfor %}
+		{% endfor %}
+
 		<main>
 			{% block body %}{% endblock %}
 
